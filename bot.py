@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+import threading
 import telebot
 import time
 import datetime as dt
@@ -9,6 +10,7 @@ import keyboard
 from keyboard import remove_keyboard
 import methods
 from credentials import TOKEN
+import schedule
 
 
 
@@ -70,7 +72,6 @@ def register(message):
             try:
                 hour = message.text
                 convertedtime = methods.convert_string_to_datetime(date,hour)
-                print(convertedtime)
                 exist = False
                 sameTime = 0
                 for booking in bookingList:
@@ -91,41 +92,6 @@ def register(message):
                     bot.send_message(chat_id=message.chat.id, text='Registration failed. You already made a booking.',reply_markup=keyboard.main_keyboard())
             except:
                 bot.send_message(chat_id=message.chat.id, text='Something is wrong, please try again.',reply_markup=keyboard.main_keyboard())
-        # def get_date(message):
-        #     try:
-        #         timeslot = message.text
-        #         convertedTime = dt.datetime.strptime(timeslot,r'%d/%m/%Y %I:%M %p')
-        #         timenow = dt.datetime.now()
-        #         if convertedTime.hour>8 and convertedTime.hour<17 and (convertedTime.minute==0 or convertedTime.minute==30) :
-        #             if convertedTime>timenow and convertedTime<timenow+timedelta(days=14):
-        #                 exist = False
-        #                 sameTime = 0
-        #                 for booking in bookingList:
-
-        #                     if(booking.userid==message.from_user.id):
-        #                         exist = True
-        #                         break
-        #                     # print(booking.timeslot+' '+convertedTime)
-        #                     if booking.timeslot == convertedTime.timestamp():
-        #                         sameTime +=1
-
-        #                 if not exist:
-            #                 if(sameTime < 3):
-            #                     newBooking.timeslot = convertedTime.timestamp()
-            #                     newBooking.userid = message.from_user.id
-            #                     firestore_service.add_booking(newBooking)
-            #                     bot.send_message(chat_id=message.chat.id, text='Registration successful.')
-            #                 else:
-            #                     bot.send_message(chat_id=message.chat.id, text='Booking for that time is full. please try other time.')                    
-            #             else:
-            #                 bot.send_message(chat_id=message.chat.id, text='Registration failed. You already made a booking.')
-            #         else:
-            #             bot.send_message(chat_id=message.chat.id, text='Booking failed. Please insert valid time and no gap longer than 14 days from now.')
-            #     else:
-            #         bot.send_message(chat_id=message.chat.id, text='Booking failed. Please insert time within 08:00 AM - 05:00 PM with 30 minutes interval.')
-            # except:
-            #      bot.send_message(chat_id=message.chat.id, text='Booking failed. Please insert correct time format.')
-                
 
         bot.send_message(chat_id=message.chat.id, text='Please enter your name.')
         bot.register_next_step_handler(message,get_name)
@@ -139,6 +105,7 @@ def register(message):
 @bot.message_handler(commands=['bookinglist'])
 def send_booking_list(message):
     try:
+        methods.delete_past_booking()
         bot.send_message(chat_id=message.chat.id,text=firestore_service.display,
         reply_markup=keyboard.main_keyboard())
     except:
@@ -150,7 +117,6 @@ def send_booking_list(message):
 @bot.message_handler(commands=['help'])
 def send_help(message):
     try:
-        print(message.contact)
         bot.send_message(chat_id=message.chat.id,text=
         '''
         Guide to use this bot.\n
@@ -169,7 +135,7 @@ def send_help(message):
 @bot.message_handler(commands=['withdraw'])
 def send_Message(message):
     try:
-        canDelete = firestore_service.delete_booking(message.from_user.id)
+        canDelete = firestore_service.delete_booking_by_userid(message.from_user.id)
         if canDelete:
             bot.send_message(chat_id=message.chat.id, text='Booking deleted successfully.',
             reply_markup=keyboard.main_keyboard())
@@ -181,7 +147,6 @@ def send_Message(message):
         text='Something is wrong, please try again.',
         reply_markup=keyboard.main_keyboard()
         )
-
 
 
 while True:
