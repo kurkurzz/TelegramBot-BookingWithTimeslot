@@ -7,13 +7,15 @@ class Booking:
         self.petname = ''
         self.timeslot = 0
         self.id = ''
+        self.phonenumber = ''
 
     def to_dict(self):
         return {
             'name' : self.name,
             'petname' : self.petname,
             'timeslot' : self.timeslot,
-            'userid' : self.userid
+            'userid' : self.userid,
+            'phonenumber' : self.phonenumber
         }
 
     #convert data from db to class
@@ -22,6 +24,7 @@ class Booking:
         self.petname = dict['petname']
         self.timeslot = int(dict['timeslot'])    
         self.userid = dict['userid']  
+        self.phonenumber = dict['phonenumber']  
         self.id = id
         self.datetime = dt.datetime.fromtimestamp(self.timeslot)
         return self

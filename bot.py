@@ -39,7 +39,17 @@ def register(message):
         newBooking = Booking()
         def get_name(message):
             try:
+                methods.check_input(message.text)
                 newBooking.name = message.text
+                bot.send_message(chat_id=message.chat.id, text='Please enter your phone number.')
+                bot.register_next_step_handler(message,get_phonenumber)
+            except:
+                bot.send_message(chat_id=message.chat.id, text='Something is wrong, please try again.',reply_markup=keyboard.main_keyboard())
+
+        def get_phonenumber(message):
+            try:
+                methods.check_input(message.text)
+                newBooking.phonenumber = message.text
                 bot.send_message(chat_id=message.chat.id, text='Please enter your pet\'s name.')
                 bot.register_next_step_handler(message,get_petname)
             except:
@@ -47,6 +57,7 @@ def register(message):
 
         def get_petname(message):
             try:
+                methods.check_input(message.text)
                 newBooking.petname = message.text
                 bot.send_message(chat_id=message.chat.id, 
                 text='Please select date.',
@@ -58,6 +69,7 @@ def register(message):
 
         def get_date(message):
             try:
+                methods.check_input(message.text)
                 nonlocal date
                 date = message.text
                 bot.send_message(chat_id=message.chat.id, 
@@ -70,6 +82,7 @@ def register(message):
 
         def get_time(message):
             try:
+                methods.check_input(message.text)
                 hour = message.text
                 convertedtime = methods.convert_string_to_datetime(date,hour)
                 exist = False
@@ -117,6 +130,7 @@ def send_booking_list(message):
 @bot.message_handler(commands=['help'])
 def send_help(message):
     try:
+        print(message)
         bot.send_message(chat_id=message.chat.id,text=
         '''
         Guide to use this bot.\n

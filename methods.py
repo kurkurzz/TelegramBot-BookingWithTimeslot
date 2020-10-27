@@ -1,4 +1,7 @@
 import datetime as dt
+from logging import raiseExceptions
+import emoji
+from telebot.types import Message
 import firestore_service
 from firestore_service import bookingList
 
@@ -21,3 +24,8 @@ def delete_past_booking():
         if booking.datetime < timenow:
             firestore_service.delete_booking_by_documentid(booking.id)
     
+def check_input(text):
+    #check if emoji
+    if(text=='' or text[0][:1]=='/' or bool(emoji.get_emoji_regexp().search(text))):
+        print('raising')
+        raise Exception
