@@ -22,7 +22,7 @@ def date_keyboard():
     for i in range(0,14):
         dates.append((now + timedelta(days=i)))
     
-    markup = types.ReplyKeyboardMarkup(row_width=7,one_time_keyboard=True)
+    markup = types.ReplyKeyboardMarkup(row_width=5,one_time_keyboard=True)
     itembtns.clear()
     for date in dates:
         itembtn = types.KeyboardButton(str(date.date().day)+'/'+str(date.date().month))
@@ -34,7 +34,7 @@ def date_keyboard():
     return markup
 
 def time_keyboard():
-    markup = types.ReplyKeyboardMarkup(row_width=9,one_time_keyboard=True)
+    markup = types.ReplyKeyboardMarkup(row_width=6,one_time_keyboard=True)
     itembtns = []
     time_slots = ['8:00','8:30','9:00','9:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30'
     ,'14:00','14:30','15:00','15:30','16:00','16:30']
