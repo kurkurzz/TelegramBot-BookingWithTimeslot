@@ -2,32 +2,32 @@ import datetime as dt
 
 class Booking:
     def __init__(self):
-        self.userid = ''
+        self.user_id = ''
         self.name =''
-        self.petname = ''
-        self.timeslot = 0
+        self.pet_name = ''
+        self.time_slot = 0
         self.id = ''
-        self.phonenumber = ''
+        self.phone_number = ''
 
     def to_dict(self):
         return {
             'name' : self.name,
-            'petname' : self.petname,
-            'timeslot' : self.timeslot,
-            'userid' : self.userid,
-            'phonenumber' : self.phonenumber
+            'petname' : self.pet_name,
+            'timeslot' : self.time_slot,
+            'userid' : self.user_id,
+            'phonenumber' : self.phone_number
         }
 
     #convert data from db to class
     def from_dict(self,dict,id):
         self.name = dict['name']
-        self.petname = dict['petname']
-        self.timeslot = int(dict['timeslot'])    
-        self.userid = dict['userid']  
-        self.phonenumber = dict['phonenumber']  
+        self.pet_name = dict['petname']
+        self.time_slot = int(dict['timeslot'])    
+        self.user_id = dict['userid']  
+        self.phone_number = dict['phonenumber']  
         self.id = id
-        self.datetime = dt.datetime.fromtimestamp(self.timeslot)
+        self.datetime = dt.datetime.fromtimestamp(self.time_slot)
         return self
 
     def __str__(self):
-        return self.id + " - " + str(self.timeslot)
+        return self.id + " - " + str(self.time_slot)

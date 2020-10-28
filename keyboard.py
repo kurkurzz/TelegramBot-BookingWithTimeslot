@@ -16,7 +16,6 @@ def main_keyboard():
 
 def date_keyboard():
     now = dt.datetime.now()
-    end = now + timedelta(days=14)
     dates = []
     itembtns = []
 
@@ -37,11 +36,11 @@ def date_keyboard():
 def time_keyboard():
     markup = types.ReplyKeyboardMarkup(row_width=9,one_time_keyboard=True)
     itembtns = []
-    timeslots = ['8:00','8:30','9:00','9:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30'
+    time_slots = ['8:00','8:30','9:00','9:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30'
     ,'14:00','14:30','15:00','15:30','16:00','16:30']
     itembtns.clear()
-    for timeslot in timeslots:
-        itembtn = types.KeyboardButton(timeslot)
+    for time_slot in time_slots:
+        itembtn = types.KeyboardButton(time_slot)
         itembtns.append(itembtn)
 
     markup.add(itembtns[0],itembtns[1],itembtns[2],itembtns[3],itembtns[4],

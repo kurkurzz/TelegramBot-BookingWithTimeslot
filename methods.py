@@ -1,27 +1,25 @@
 import datetime as dt
-from logging import raiseExceptions
 import emoji
-from telebot.types import Message
 import firestore_service
-from firestore_service import bookingList
+from firestore_service import booking_list
 
 def convert_string_to_datetime(date,hour):
-    timenow = dt.datetime.now()       
+    time_now = dt.datetime.now()       
     year = ''
-    probdate = dt.datetime.strptime(date+'/'+str(timenow.year),r'%d/%m/%Y')
-    if(probdate<timenow):
-        year = str(timenow.year+1)
+    prob_date = dt.datetime.strptime(date+'/'+str(time_now.year),r'%d/%m/%Y')
+    if(prob_date<time_now):
+        year = str(time_now.year+1)
     else:
-        year = str(timenow.year)
+        year = str(time_now.year)
     date += '/'+ str(year)
     time = date + ' ' + hour
-    timeconverted = dt.datetime.strptime(time,r'%d/%m/%Y %H:%M')
-    return timeconverted
+    converted_time = dt.datetime.strptime(time,r'%d/%m/%Y %H:%M')
+    return converted_time
 
 def delete_past_booking():
-    timenow = dt.datetime.now()
-    for booking in bookingList:
-        if booking.datetime < timenow:
+    time_now = dt.datetime.now()
+    for booking in booking_list:
+        if booking.datetime < time_now:
             firestore_service.delete_booking_by_documentid(booking.id)
     
 def check_input(text):

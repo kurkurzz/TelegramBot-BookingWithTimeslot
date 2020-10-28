@@ -8,58 +8,58 @@ from booking import Booking
 cred = credentials.Certificate("firebase-adminsdk.json")
 app = firebase_admin.initialize_app(cred)
 db = firestore.client()
-bookingCollection = db.collection(u'booking')
-bookingList = []
+booking_collection = db.collection(u'booking')
+booking_list = []
 display = 'There is a problem showing booking list.'
 
-def add_booking(newBooking):
-    print(newBooking.to_dict())
-    bookingCollection.document().set(newBooking.to_dict())
+def add_booking(new_booking):
+    print(new_booking.to_dict())
+    booking_collection.document().set(new_booking.to_dict())
 
-def delete_booking_by_userid(userid):
-    global bookingList
-    for booking in bookingList:
-        if(booking.userid==userid):
-            bookingCollection.document(booking.id).delete()
+def delete_booking_by_userid(user_id):
+    global booking_list
+    for booking in booking_list:
+        if(booking.user_id==user_id):
+            booking_collection.document(booking.id).delete()
             return True
     return False
 
 def delete_booking_by_documentid(id):
-    bookingCollection.document(id).delete()
+    booking_collection.document(id).delete()
     
 def get_booking_list():
-    sortedList = sorted(bookingList,key=lambda booking: booking.datetime)
+    sorted_list = sorted(booking_list,key=lambda booking: booking.datetime)
     dates = []
-    todisplay = 'List of booking.\n\n'
+    to_display = 'List of booking.\n\n'
     dates.clear()
-    for sortedBooking in sortedList:
+    for sortedBooking in sorted_list:
         if not sortedBooking.datetime.date() in dates:
             dates.append(sortedBooking.datetime.date())
 
     for date in dates:
-        todisplay += str(date.day) +'/'+str(date.month) +'/'+str(date.year) +'\n'
-        for sortedBooking in sortedList:
-            if(sortedBooking.datetime.date()==date):
-                todisplay += sortedBooking.name +'   '+str(sortedBooking.datetime.hour)+':'+str(sortedBooking.datetime.minute)+'\n'
-        todisplay += '\n'
-    return todisplay
+        to_display += str(date.day) +'/'+str(date.month) +'/'+str(date.year) +'\n'
+        for sorted_booking in sorted_list:
+            if(sorted_booking.datetime.date()==date):
+                to_display += sorted_booking.name +'   '+str(sorted_booking.datetime.hour)+':'+str(sorted_booking.datetime.minute)+'\n'
+        to_display += '\n'
+    return to_display
 
 
 callback_done = threading.Event()
 def on_snapshot(doc_snapshot, changes, read_time):
-    global bookingList
+    global booking_list
     global display
-    bookingList.clear()
+    booking_list.clear()
     for doc in doc_snapshot:
         booking = Booking()
         booking.from_dict(doc.to_dict(),doc.id)
-        bookingList.append(booking)
-        # print('id: ',booking,' ',doc.to_dict())
+        booking_list.append(booking)
+        print('id: ',booking,' ',doc.to_dict())
+    print('\n')
     display = get_booking_list()
-    print(display)
     callback_done.set()
 # Watch the document
-doc_watch = bookingCollection.on_snapshot(on_snapshot)
+doc_watch = booking_collection.on_snapshot(on_snapshot)
 
 
 
