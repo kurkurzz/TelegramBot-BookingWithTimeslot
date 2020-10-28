@@ -28,17 +28,18 @@ def delete_booking_by_documentid(id):
     booking_collection.document(id).delete()
     
 def get_booking_list():
-    sorted_list = sorted(booking_list,key=lambda booking: booking.datetime)
+    # sorted_list = sorted(booking_list,key=lambda booking: booking.datetime)
+    booking_list.sort(key=lambda booking: booking.datetime)
     dates = []
     to_display = 'List of booking.\n\n'
     dates.clear()
-    for sortedBooking in sorted_list:
-        if not sortedBooking.datetime.date() in dates:
-            dates.append(sortedBooking.datetime.date())
+    for sorted_booking in booking_list:
+        if not sorted_booking.datetime.date() in dates:
+            dates.append(sorted_booking.datetime.date())
 
     for date in dates:
         to_display += str(date.day) +'/'+str(date.month) +'/'+str(date.year) +'\n'
-        for sorted_booking in sorted_list:
+        for sorted_booking in booking_list:
             if(sorted_booking.datetime.date()==date):
                 to_display += sorted_booking.name +'   '+str(sorted_booking.datetime.hour)+':'+str(sorted_booking.datetime.minute)+'\n'
         to_display += '\n'
