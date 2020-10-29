@@ -49,7 +49,7 @@ def register(message):
                 methods.check_input(message.text)
                 new_booking.pet_name = message.text
                 bot.send_message(chat_id=message.chat.id, 
-                text='Please select date.',
+                text='Please select a date.',
                 reply_markup=keyboard.date_keyboard()
                 )
                 bot.register_next_step_handler(message,get_date)
@@ -62,7 +62,7 @@ def register(message):
                 nonlocal date
                 date = message.text
                 bot.send_message(chat_id=message.chat.id, 
-                text='Please time slot date.',
+                text='Please select a time slot.',
                 reply_markup=keyboard.time_keyboard()
                 )
                 bot.register_next_step_handler(message,get_time)
