@@ -42,7 +42,7 @@ def get_booking_list():
         to_display += str(date.day) +'/'+str(date.month) +'/'+str(date.year) +' '+ampm+'\n'
         for sorted_booking in booking_list:
             if(sorted_booking.datetime.date()==date):
-                to_display += sorted_booking.name +'   '+str(sorted_booking.datetime.hour)+':'+str(sorted_booking.datetime.minute)+'\n'
+                to_display += sorted_booking.name + '   ' + sorted_booking.datetime.strftime("%I:%M %p") +'\n'
         to_display += '\n'
     return to_display
 
