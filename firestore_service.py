@@ -4,6 +4,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from booking import Booking
+import datetime as dt
 
 cred = credentials.Certificate("firebase-adminsdk.json")
 app = firebase_admin.initialize_app(cred)
@@ -29,7 +30,6 @@ def delete_booking_by_documentid(id):
     
 def get_booking_list():
     # sorted_list = sorted(booking_list,key=lambda booking: booking.datetime)
-    booking_list.sort(key=lambda booking: booking.datetime)
     dates = []
     to_display = 'List of booking.\n\n'
     dates.clear()
@@ -38,7 +38,8 @@ def get_booking_list():
             dates.append(sorted_booking.datetime.date())
 
     for date in dates:
-        to_display += str(date.day) +'/'+str(date.month) +'/'+str(date.year) +'\n'
+        ampm = dt.datetime(year=date.year,month=date.month,day=date.day).strftime("%A")
+        to_display += str(date.day) +'/'+str(date.month) +'/'+str(date.year) +' '+ampm+'\n'
         for sorted_booking in booking_list:
             if(sorted_booking.datetime.date()==date):
                 to_display += sorted_booking.name +'   '+str(sorted_booking.datetime.hour)+':'+str(sorted_booking.datetime.minute)+'\n'
@@ -57,6 +58,7 @@ def on_snapshot(doc_snapshot, changes, read_time):
         booking_list.append(booking)
         print('id: ',booking,' ',doc.to_dict())
     print('\n')
+    booking_list.sort(key=lambda booking: booking.datetime)
     display = get_booking_list()
     callback_done.set()
 # Watch the document

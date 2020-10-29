@@ -84,7 +84,7 @@ def register(message):
                         same_time +=1
                 if not exist:
                     if(same_time < 3):
-                        new_booking.time_slot = converted_time.timestamp()
+                        new_booking.time_slot = int(converted_time.timestamp())
                         new_booking.user_id = message.from_user.id
                         firestore_service.add_booking(new_booking)
                         bot.send_message(chat_id=message.chat.id, text='Registration successful.',reply_markup=keyboard.main_keyboard())
