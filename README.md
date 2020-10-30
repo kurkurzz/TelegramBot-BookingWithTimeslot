@@ -2,61 +2,61 @@
 
 Telegram bot for booking/reservation system using python.
 <br>
-Make a booking - View booking list - Cancel booking
+
 ![20-10-30-17-39-38_1](https://user-images.githubusercontent.com/64152220/97693310-372ee400-1a5e-11eb-8bc9-447e9ea98bb8.gif)  ![list](https://user-images.githubusercontent.com/64152220/97693784-e966ab80-1a5e-11eb-8624-dda6a5e14776.gif)  ![withdraw](https://user-images.githubusercontent.com/64152220/97693894-0f8c4b80-1a5f-11eb-99e7-ab0253e90e74.gif)
 
-##Technology used
+## Technology used
 - Telegram (interface)
 - Firebase Firestore (database)
 - Heroku (optional server)
 
-##Steps To Recreate
-####1. Clone this project repository.
-####2. Install required packages in ```requirements.txt```.
+## Steps To Recreate
+#### 1. Clone this project repository.
+#### 2. Install required packages in ```requirements.txt```.
 - In the project directory terminal, run command:
   
         $ pip install -r requirements.txt
-####3. Create Telegram bot Token.
+#### 3. Create Telegram bot Token.
 - Open Telegram.
- <br>
+
 - Search for BotFather (pick the one with verified icon).
     ![telesearch](https://user-images.githubusercontent.com/64152220/97678799-a3571b00-1a51-11eb-8486-e33d03d162d3.png)
- <br>
+
 - Enter ```/createBot``` in the chat and then insert bot name.
     ![telecommands](https://user-images.githubusercontent.com/64152220/97679236-40b24f00-1a52-11eb-8c20-2f8f15f70810.jpg)
- <br>
+
 - Copy token given (yellow arrow^^).
-<br>
+
 - Create new file ```credentials.py``` and insert the following code.
   
         TOKEN = '<your-telegrambot-token>' 
-<br>
-####4. Create Firestore database.
+
+#### 4. Create Firestore database.
 - Create a Firebase account https://firebase.google.com (might need to insert billing information but don't worry it's still free)
-<br>
+
 - Go to Firebase console and click ```add project```.
-<br>
+
 ##### In ```Cloud Firestore``` tab.
 - Click ```Create database```.
-<br>
+
 - Select ```Production Mode``` and click ```Next```.
   ![Webp net-resizeimage](https://user-images.githubusercontent.com/64152220/97683979-c84d8d00-1a55-11eb-918b-9da3ec8232e7.png)
-<br>
+
 - Go to ```Rules``` tab and change the ```false``` to ```true```.
 ![Screenshot (33)_LI](https://user-images.githubusercontent.com/64152220/97685620-53c71e00-1a56-11eb-91aa-0b180e05e34d.jpg)
-<br>
+
 ##### In ```Settings``` tab.
 
 - Go to ```Service Accounts```.
-<br>
+
 - Click ```Generate New Private Key```.
 ![Webp net-resizeimage (3)](https://user-images.githubusercontent.com/64152220/97688492-70178a80-1a57-11eb-96d0-94e97b88a016.png)
-<br>
+
 - A file will be downloaded. Rename the file name to ```firebase-adminsdk.json```.
-<br>
+
 - Insert the file in project directory.
-<br>
-####4. Run ```bot.py``` to run the script.
+
+#### 5. Run ```bot.py``` to run the script.
 - This script need to be run 24/7 for better user experience.
 - To deploy on Heroku, create new file ```Procfile``` (without file extension) and insert the following
   
