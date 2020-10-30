@@ -42,7 +42,7 @@ Telegram bot for booking/reservation system using python.
 - Click ```Create database```.
 
 - Select ```Production Mode``` and click ```Next```.
-- 
+ 
   ![Webp net-resizeimage](https://user-images.githubusercontent.com/64152220/97683979-c84d8d00-1a55-11eb-918b-9da3ec8232e7.png)
 
 - Go to ```Rules``` tab and change the ```false``` to ```true```.
