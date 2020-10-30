@@ -9,6 +9,7 @@ class Booking:
         self.id = ''
         self.phone_number = ''
 
+    #convert from object to dict to upload to db
     def to_dict(self):
         return {
             'name' : self.name,
@@ -18,7 +19,7 @@ class Booking:
             'phonenumber' : self.phone_number
         }
 
-    #convert data from db to class
+    #convert data from db to object
     def from_dict(self,dict,id):
         self.name = dict['name']
         self.pet_name = dict['petname']

@@ -23,7 +23,7 @@ Telegram bot for booking/reservation system using python.
  
     ![telesearch](https://user-images.githubusercontent.com/64152220/97678799-a3571b00-1a51-11eb-8486-e33d03d162d3.png)
 
-- Enter ```/createBot``` in the chat and then insert bot name.
+- Enter ```/newBot``` in the chat and then insert bot name.
   
     ![telecommands](https://user-images.githubusercontent.com/64152220/97679236-40b24f00-1a52-11eb-8c20-2f8f15f70810.jpg)
 
@@ -34,9 +34,11 @@ Telegram bot for booking/reservation system using python.
         TOKEN = '<your-telegrambot-token>' 
 
 #### 4. Create Firestore database.
-- Create a Firebase account https://firebase.google.com (might need to insert billing information but don't worry it's still free)
+- Create a Firebase account https://firebase.google.com (might need to insert billing information but don't worry it's still free).
 
 - Go to Firebase console and click ```add project```.
+
+- Give the project a name.
 
 ##### In ```Cloud Firestore``` tab.
 - Click ```Create database```.
@@ -66,3 +68,15 @@ Telegram bot for booking/reservation system using python.
 - To deploy on Heroku, create new file ```Procfile``` (without file extension) and insert the following
   
         worker: python bot.py
+
+## Files explaination
+
+- ```bot.py```: Main script. This file will connect with Telegram API.
+- ```firestore_service.py```: This file will connect with FireStore database.
+- ```booking.py```: Contains Booking class.
+- ```keyboards.py```: Contains keyboard layouts.
+
+## TO DO
+
+- [ ] Better way to delete past booking. Instead of delete when ```/withdraw```, delete daily.
+- [ ] Better way to insert list into methods in ```keyboards.py```
