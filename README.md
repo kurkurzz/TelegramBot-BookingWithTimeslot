@@ -20,9 +20,11 @@ Telegram bot for booking/reservation system using python.
 - Open Telegram.
 
 - Search for BotFather (pick the one with verified icon).
+ 
     ![telesearch](https://user-images.githubusercontent.com/64152220/97678799-a3571b00-1a51-11eb-8486-e33d03d162d3.png)
 
 - Enter ```/createBot``` in the chat and then insert bot name.
+  
     ![telecommands](https://user-images.githubusercontent.com/64152220/97679236-40b24f00-1a52-11eb-8c20-2f8f15f70810.jpg)
 
 - Copy token given (yellow arrow^^).
@@ -40,9 +42,11 @@ Telegram bot for booking/reservation system using python.
 - Click ```Create database```.
 
 - Select ```Production Mode``` and click ```Next```.
+- 
   ![Webp net-resizeimage](https://user-images.githubusercontent.com/64152220/97683979-c84d8d00-1a55-11eb-918b-9da3ec8232e7.png)
 
 - Go to ```Rules``` tab and change the ```false``` to ```true```.
+  
 ![Screenshot (33)_LI](https://user-images.githubusercontent.com/64152220/97685620-53c71e00-1a56-11eb-91aa-0b180e05e34d.jpg)
 
 ##### In ```Settings``` tab.
@@ -50,6 +54,7 @@ Telegram bot for booking/reservation system using python.
 - Go to ```Service Accounts```.
 
 - Click ```Generate New Private Key```.
+  
 ![Webp net-resizeimage (3)](https://user-images.githubusercontent.com/64152220/97688492-70178a80-1a57-11eb-96d0-94e97b88a016.png)
 
 - A file will be downloaded. Rename the file name to ```firebase-adminsdk.json```.
