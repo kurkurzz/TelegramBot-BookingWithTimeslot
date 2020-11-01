@@ -1,6 +1,7 @@
 # TelegramBot-BookingWithTimeslot
 
 Telegram bot for booking/reservation system using python.
+
 Dashboard for admin, check https://github.com/kurkurzz/AdminDashboard-BookingWithTimeslot
 - Can set maximum booking per timeslot. (default: 3)
 - Limit 1 booking per account. (Future update might can limit more than 1)
